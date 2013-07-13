@@ -13,7 +13,7 @@ public class MemoryBooster extends Fragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 	
-		View view = inflater.inflate(R.layout.fragment_ram_booster, container, false);
+		View view = inflater.inflate(R.layout.fragment_memory_booster, container, false);
 		
 		return view;
 	}
