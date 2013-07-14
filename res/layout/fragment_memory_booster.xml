@@ -1,12 +1,70 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" >
+    android:layout_height="match_parent"
+    android:background="@android:color/black"
+    android:padding="8dp" >
+
+    <LinearLayout
+        android:id="@+id/linerLayout_ramBooster_stat"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:text="Memory usage:"
+            android:textColor="@android:color/white" />
+
+        <SeekBar
+            android:id="@+id/seekBar_ramBooster_stat"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_weight="1"
+            android:background="@drawable/tech_border2"
+            android:max="100"
+            android:progressDrawable="@drawable/styled_progress" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:text="100 %"
+            android:textColor="@android:color/white" />
+    </LinearLayout>
 
     <TextView
+        android:id="@+id/textView_ramBooster_info"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/linerLayout_ramBooster_stat"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="8dp"
+        android:text="Free Memory --- / --- Total Memory (Megabytes)"
+        android:textColor="@android:color/white"
+        android:textSize="12sp"
+        android:textStyle="bold|italic" />
+
+    <com.audacity.booster.views.HoloCircleSeekBar
+        android:id="@+id/circleSeekBar_memory_stat"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:clickable="false"
+        android:layout_below="@+id/textView_ramBooster_info"
         android:layout_centerInParent="true"
-        android:text="Ram-Booster" />
+        app:max="100"
+        app:pointer_color="#c0c0c0"
+        app:pointer_halo_color="#88252525"
+        app:pointer_size="25"
+        app:text_color="#FFFFFF"
+        app:text_size="40"
+        app:wheel_active_color="#8b0000"
+        app:wheel_unactive_color="#008000" />
 
 </RelativeLayout>

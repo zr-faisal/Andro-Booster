@@ -10,9 +10,10 @@
     <string name="drawer_close">Close</string>
     
     <string-array name="nav_items">
-        <item>Ram-Booster</item>
-        <item>Net-Booster</item>
-        <item>GPS-Booster</item>
+        <item>Home</item>
+        <item>Boost Memory</item>
+        <item>Boost Network</item>
+        <item>Boost GPS</item>
         <item>Antivirus PRO</item>
         <item>WIFI Extender</item>
         <item>Battery Saver</item>

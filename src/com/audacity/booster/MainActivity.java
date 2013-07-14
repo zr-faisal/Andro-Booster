@@ -1,6 +1,10 @@
 package com.audacity.booster;
 
+import com.audacity.booster.fragments.MemoryBooster;
+
 import android.app.Activity;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
@@ -11,7 +15,9 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -21,6 +27,12 @@ public class MainActivity extends Activity {
 	TextView tvMemoryBooster, tvSignalBooster, tvGpsBooster;
 	TextView tvAntiVirus, tvWifiExtender, tvBatterySaver;
 	Button btnContact, btnAboutUs;
+	RelativeLayout rlFragment;
+	LinearLayout rlFrame;
+	
+	// Fragment variables
+	FragmentManager mFragmentManager;
+	FragmentTransaction mFragmentTransaction;
 
 	String[] navItems;
 	
@@ -38,6 +50,7 @@ public class MainActivity extends Activity {
 		getActionBar().setDisplayHomeAsUpEnabled(true);
         getActionBar().setHomeButtonEnabled(true);
 		
+        mFragmentManager = getFragmentManager();
 		navItems = getResources().getStringArray(R.array.nav_items);
 		
 		initIDs();
@@ -50,6 +63,9 @@ public class MainActivity extends Activity {
 		
 		lvNavDrawer = (ListView) findViewById(R.id.left_drawer);
 		
+		rlFrame = (LinearLayout) findViewById(R.id.content_frame);
+		rlFragment = (RelativeLayout) findViewById(R.id.content_fragment);
+		
 		tvMemoryBooster = (TextView) findViewById(R.id.textView_main_memoryBooster);
 		tvSignalBooster = (TextView) findViewById(R.id.textView_main_signalBooster);
 		tvGpsBooster = (TextView) findViewById(R.id.textView_main_gpsBooster);
@@ -58,8 +74,8 @@ public class MainActivity extends Activity {
 		tvWifiExtender = (TextView) findViewById(R.id.textView_main_wifiExtender);
 		tvBatterySaver = (TextView) findViewById(R.id.textView_main_batterySaver);
 		
-		btnContact = (Button) findViewById(R.id.button_main_contact);
-		btnAboutUs = (Button) findViewById(R.id.button_main_aboutUs);
+//		btnContact = (Button) findViewById(R.id.button_main_contact);
+//		btnAboutUs = (Button) findViewById(R.id.button_main_aboutUs);
 	}
 
 	private void initActions() {
@@ -87,10 +103,42 @@ public class MainActivity extends Activity {
 			@Override
 			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
 				// TODO Auto-generated method stub
-				Toast.makeText(MainActivity.this, "Navigate to: " + navItems[arg2], Toast.LENGTH_SHORT).show();
-				mTitle = navItems[arg2];
-				// Highlight the selected item, update the title, and close the drawer
-			    lvNavDrawer.setItemChecked(arg2, true);
+				switch(arg2) {
+				
+				case 0:
+					rlFrame.setVisibility(View.VISIBLE);
+					rlFragment.setVisibility(View.GONE);
+					break;
+					
+				case 1:
+					rlFragment.setVisibility(View.VISIBLE);
+					rlFrame.setVisibility(View.GONE);
+					rlFrame.setEnabled(false);
+					goToMemoryBooster();
+					break;
+					
+				case 2:
+					Toast.makeText(MainActivity.this, "Navigate to: " + navItems[arg2], Toast.LENGTH_SHORT).show();
+					break;
+					
+				case 3:
+					Toast.makeText(MainActivity.this, "Navigate to: " + navItems[arg2], Toast.LENGTH_SHORT).show();
+					break;
+					
+				case 4:
+					Toast.makeText(MainActivity.this, "Navigate to: " + navItems[arg2], Toast.LENGTH_SHORT).show();
+					break;
+					
+				case 5:
+					Toast.makeText(MainActivity.this, "Navigate to: " + navItems[arg2], Toast.LENGTH_SHORT).show();
+					break;
+					
+				case 6:
+					Toast.makeText(MainActivity.this, "Navigate to: " + navItems[arg2], Toast.LENGTH_SHORT).show();
+					break;
+				}
+				
+				// Close the drawer
 			    mDrawerLayout.closeDrawer(lvNavDrawer);
 			}
 		});
@@ -100,7 +148,7 @@ public class MainActivity extends Activity {
 			@Override
 			public void onClick(View arg0) {
 				// TODO Auto-generated method stub
-				Toast.makeText(getBaseContext(), tvMemoryBooster.getText().toString(), Toast.LENGTH_SHORT).show();
+				goToMemoryBooster();
 			}
 		});
 		
@@ -149,23 +197,41 @@ public class MainActivity extends Activity {
 			}
 		});
 		
-		btnContact.setOnClickListener(new View.OnClickListener() {
-			
-			@Override
-			public void onClick(View arg0) {
-				// TODO Auto-generated method stub
-				Toast.makeText(getBaseContext(), btnContact.getText().toString(), Toast.LENGTH_SHORT).show();
-			}
-		});
+//		btnContact.setOnClickListener(new View.OnClickListener() {
+//			
+//			@Override
+//			public void onClick(View arg0) {
+//				// TODO Auto-generated method stub
+//				Toast.makeText(getBaseContext(), btnContact.getText().toString(), Toast.LENGTH_SHORT).show();
+//			}
+//		});
+//		
+//		btnAboutUs.setOnClickListener(new View.OnClickListener() {
+//			
+//			@Override
+//			public void onClick(View arg0) {
+//				// TODO Auto-generated method stub
+//				Toast.makeText(getBaseContext(), btnAboutUs.getText().toString(), Toast.LENGTH_SHORT).show();
+//			}
+//		});
+	}
+	
+	// Highlight the selected item, update the title, and close the drawer
+	private void setNavigatedTitle(int pos) {
 		
-		btnAboutUs.setOnClickListener(new View.OnClickListener() {
-			
-			@Override
-			public void onClick(View arg0) {
-				// TODO Auto-generated method stub
-				Toast.makeText(getBaseContext(), btnAboutUs.getText().toString(), Toast.LENGTH_SHORT).show();
-			}
-		});
+		mTitle = navItems[pos];
+	    lvNavDrawer.setItemChecked(pos, true);
+	}
+	
+	// Fragment Navigations
+	private void goToMemoryBooster() {
+		
+		mFragmentTransaction = mFragmentManager.beginTransaction();
+		mFragmentTransaction.replace(R.id.content_fragment, new MemoryBooster());
+		mFragmentTransaction.addToBackStack(null);
+		mFragmentTransaction.commit();
+		
+		setNavigatedTitle(1);
 	}
 	
 	@Override
