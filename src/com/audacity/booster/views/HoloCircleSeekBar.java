@@ -151,6 +151,9 @@ public class HoloCircleSeekBar extends View {
 	private int end_wheel;
 
 	private boolean show_text = true;
+	
+	// Added zr.faisal @ 14-05-13
+	String finalText;
 
 	public HoloCircleSeekBar(Context context) {
 		super(context);
@@ -365,10 +368,11 @@ public class HoloCircleSeekBar extends View {
 		// mColorWheelRectangle.centerY(), (bounds.width() / 2) + 5,
 		// mCircleTextColor);
 		if (show_text)
+			finalText = text + "% free";
 			canvas.drawText(
-					text + "%",
+					finalText,
 					(mColorWheelRectangle.centerX())
-							- (textPaint.measureText(text) / 2),
+							- (textPaint.measureText(finalText) / 2),
 					mColorWheelRectangle.centerY() + bounds.height() / 2,
 					textPaint);
 
@@ -450,6 +454,15 @@ public class HoloCircleSeekBar extends View {
 	 */
 	public int getValue() {
 		return conversion;
+	}
+	
+	public void setValue(int value) {
+		
+		text = String.valueOf(value);
+		arc_finish_radians = (int) calculateAngleFromText(value) - 90;
+		mAngle = calculateAngleFromRadians(arc_finish_radians);
+		pointerPosition = calculatePointerPosition(mAngle);
+		invalidate();
 	}
 
 	@Override

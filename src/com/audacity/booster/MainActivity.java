@@ -107,6 +107,7 @@ public class MainActivity extends Activity {
 				
 				case 0:
 					rlFrame.setVisibility(View.VISIBLE);
+					rlFrame.setEnabled(true);
 					rlFragment.setVisibility(View.GONE);
 					break;
 					
@@ -148,6 +149,10 @@ public class MainActivity extends Activity {
 			@Override
 			public void onClick(View arg0) {
 				// TODO Auto-generated method stub
+				rlFragment.setVisibility(View.VISIBLE);
+				rlFrame.setVisibility(View.GONE);
+				rlFrame.setEnabled(false);
+				
 				goToMemoryBooster();
 			}
 		});
