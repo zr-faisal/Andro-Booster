@@ -56,15 +56,13 @@ public class MemoryBooster extends Fragment {
 		tvCurrentUsage.setText("Currently Used = " + (totalMemory - freeMemory) + " MB");
 		
 		hcsMemoryMeter.setValue(parcentage);
-		hcsMemoryMeter.setEnabled(false);
-		hcsMemoryMeter.setClickable(false);
-//		hcsMemoryMeter.setTouchDelegate(null);
 		
 		btnBoostMemory.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
 			public void onClick(View arg0) {
 				// TODO Auto-generated method stub
+				freeMemory();
 				freeMemory();
 			}
 		});
@@ -87,11 +85,10 @@ public class MemoryBooster extends Fragment {
 //			Log.i("freeMemory: ", "ID=" + recent.id + " , PID=" + recent.persistentId);
 //			Log.i("freeMemory: ", "Pacage=" + recent.origActivity.getPackageName());
 //		}
-		
 		System.runFinalization();
 	    Runtime.getRuntime().gc();
 	    System.gc();
-	    
+		
 	    updateUI();
 	}
 	

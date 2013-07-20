@@ -465,110 +465,110 @@ public class HoloCircleSeekBar extends View {
 		invalidate();
 	}
 
-	@Override
-	public boolean onTouchEvent(MotionEvent event) {
-		// Convert coordinates to our internal coordinate system
-		float x = event.getX() - mTranslationOffset;
-		float y = event.getY() - mTranslationOffset;
-
-		switch (event.getAction()) {
-		case MotionEvent.ACTION_DOWN:
-			// Check whether the user pressed on (or near) the pointer
-			mAngle = (float) java.lang.Math.atan2(y, x);
-
-			block_end = false;
-			block_start = false;
-			mUserIsMovingPointer = true;
-
-			arc_finish_radians = calculateRadiansFromAngle(mAngle);
-
-			if (arc_finish_radians > end_wheel) {
-				arc_finish_radians = end_wheel;
-				block_end = true;
-			}
-
-			if (!block_end && !block_start) {
-				text = String
-						.valueOf(calculateTextFromAngle(arc_finish_radians));
-				pointerPosition = calculatePointerPosition(mAngle);
-				invalidate();
-			}
-			break;
-		case MotionEvent.ACTION_MOVE:
-			if (mUserIsMovingPointer) {
-				mAngle = (float) java.lang.Math.atan2(y, x);
-
-				int radians = calculateRadiansFromAngle(mAngle);
-
-				if (last_radians > radians && radians < (360 / 6) && x > lastX
-						&& last_radians > (360 / 6)) {
-
-					if (!block_end && !block_start)
-						block_end = true;
-					// if (block_start)
-					// block_start = false;
-				} else if (last_radians >= start_arc
-						&& last_radians <= (360 / 4) && radians <= (360 - 1)
-						&& radians >= ((360 / 4) * 3) && x < lastX) {
-					if (!block_start && !block_end)
-						block_start = true;
-					// if (block_end)
-					// block_end = false;
-
-				} else if (radians >= end_wheel && !block_start
-						&& last_radians < radians) {
-					block_end = true;
-				} else if (radians < end_wheel && block_end
-						&& last_radians > end_wheel) {
-					block_end = false;
-				} else if (radians < start_arc && last_radians > radians
-						&& !block_end) {
-					block_start = true;
-				} else if (block_start && last_radians < radians
-						&& radians > start_arc && radians < end_wheel) {
-					block_start = false;
-				}
-
-				if (block_end) {
-
-					arc_finish_radians = end_wheel - 1;
-					text = String.valueOf(max);
-					mAngle = calculateAngleFromRadians(arc_finish_radians);
-					pointerPosition = calculatePointerPosition(mAngle);
-				} else if (block_start) {
-
-					arc_finish_radians = start_arc;
-					mAngle = calculateAngleFromRadians(arc_finish_radians);
-					text = String.valueOf(0);
-					pointerPosition = calculatePointerPosition(mAngle);
-				} else {
-					// text = String.valueOf(calculateTextFromAngle(mAngle));
-					arc_finish_radians = calculateRadiansFromAngle(mAngle);
-					text = String
-							.valueOf(calculateTextFromAngle(arc_finish_radians));
-					pointerPosition = calculatePointerPosition(mAngle);
-				}
-				invalidate();
-				if (mOnCircleSeekBarChangeListener != null)
-					mOnCircleSeekBarChangeListener.onProgressChanged(this,
-							Integer.parseInt(text), true);
-
-				last_radians = radians;
-
-			}
-			break;
-		case MotionEvent.ACTION_UP:
-			mUserIsMovingPointer = false;
-			break;
-		}
-		// Fix scrolling
-		if (event.getAction() == MotionEvent.ACTION_MOVE && getParent() != null) {
-			getParent().requestDisallowInterceptTouchEvent(true);
-		}
-		lastX = x;
-
-		return true;
-	}
+//	@Override
+//	public boolean onTouchEvent(MotionEvent event) {
+//		// Convert coordinates to our internal coordinate system
+//		float x = event.getX() - mTranslationOffset;
+//		float y = event.getY() - mTranslationOffset;
+//
+//		switch (event.getAction()) {
+//		case MotionEvent.ACTION_DOWN:
+//			// Check whether the user pressed on (or near) the pointer
+//			mAngle = (float) java.lang.Math.atan2(y, x);
+//
+//			block_end = false;
+//			block_start = false;
+//			mUserIsMovingPointer = true;
+//
+//			arc_finish_radians = calculateRadiansFromAngle(mAngle);
+//
+//			if (arc_finish_radians > end_wheel) {
+//				arc_finish_radians = end_wheel;
+//				block_end = true;
+//			}
+//
+//			if (!block_end && !block_start) {
+//				text = String
+//						.valueOf(calculateTextFromAngle(arc_finish_radians));
+//				pointerPosition = calculatePointerPosition(mAngle);
+//				invalidate();
+//			}
+//			break;
+//		case MotionEvent.ACTION_MOVE:
+//			if (mUserIsMovingPointer) {
+//				mAngle = (float) java.lang.Math.atan2(y, x);
+//
+//				int radians = calculateRadiansFromAngle(mAngle);
+//
+//				if (last_radians > radians && radians < (360 / 6) && x > lastX
+//						&& last_radians > (360 / 6)) {
+//
+//					if (!block_end && !block_start)
+//						block_end = true;
+//					// if (block_start)
+//					// block_start = false;
+//				} else if (last_radians >= start_arc
+//						&& last_radians <= (360 / 4) && radians <= (360 - 1)
+//						&& radians >= ((360 / 4) * 3) && x < lastX) {
+//					if (!block_start && !block_end)
+//						block_start = true;
+//					// if (block_end)
+//					// block_end = false;
+//
+//				} else if (radians >= end_wheel && !block_start
+//						&& last_radians < radians) {
+//					block_end = true;
+//				} else if (radians < end_wheel && block_end
+//						&& last_radians > end_wheel) {
+//					block_end = false;
+//				} else if (radians < start_arc && last_radians > radians
+//						&& !block_end) {
+//					block_start = true;
+//				} else if (block_start && last_radians < radians
+//						&& radians > start_arc && radians < end_wheel) {
+//					block_start = false;
+//				}
+//
+//				if (block_end) {
+//
+//					arc_finish_radians = end_wheel - 1;
+//					text = String.valueOf(max);
+//					mAngle = calculateAngleFromRadians(arc_finish_radians);
+//					pointerPosition = calculatePointerPosition(mAngle);
+//				} else if (block_start) {
+//
+//					arc_finish_radians = start_arc;
+//					mAngle = calculateAngleFromRadians(arc_finish_radians);
+//					text = String.valueOf(0);
+//					pointerPosition = calculatePointerPosition(mAngle);
+//				} else {
+//					// text = String.valueOf(calculateTextFromAngle(mAngle));
+//					arc_finish_radians = calculateRadiansFromAngle(mAngle);
+//					text = String
+//							.valueOf(calculateTextFromAngle(arc_finish_radians));
+//					pointerPosition = calculatePointerPosition(mAngle);
+//				}
+//				invalidate();
+//				if (mOnCircleSeekBarChangeListener != null)
+//					mOnCircleSeekBarChangeListener.onProgressChanged(this,
+//							Integer.parseInt(text), true);
+//
+//				last_radians = radians;
+//
+//			}
+//			break;
+//		case MotionEvent.ACTION_UP:
+//			mUserIsMovingPointer = false;
+//			break;
+//		}
+//		// Fix scrolling
+//		if (event.getAction() == MotionEvent.ACTION_MOVE && getParent() != null) {
+//			getParent().requestDisallowInterceptTouchEvent(true);
+//		}
+//		lastX = x;
+//
+//		return true;
+//	}
 
 	/**
 	 * Calculate the pointer's coordinates on the color wheel using the supplied

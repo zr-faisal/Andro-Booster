@@ -17,7 +17,7 @@
         android:text="Memory Status"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textColor="@android:color/white"
-        android:typeface="monospace" />
+        android:typeface="sans" />
 
     <TextView
         android:id="@+id/textView_ramBooster_totalMemory"
@@ -28,7 +28,7 @@
         android:text="System Memory = --- MB"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:textColor="@android:color/white"
-        android:typeface="monospace" />
+        android:typeface="sans" />
 
     <TextView
         android:id="@+id/textView_ramBooster_usedMemory"
@@ -39,30 +39,21 @@
         android:text="Currently Used = --- MB"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:textColor="@android:color/white"
-        android:typeface="monospace" />
+        android:typeface="sans" />
 
-    <LinearLayout
-        android:id="@+id/LinearLayout_memory_stat"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <com.audacity.booster.views.HoloCircleSeekBar
+        android:id="@+id/circleSeekBar_memory_stat"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        app:max="100"
+        app:pointer_color="#c0c0c0"
+        app:pointer_halo_color="#88252525"
+        app:pointer_size="25"
+        app:text_color="#FFFFFF"
+        app:text_size="40"
         android:layout_centerInParent="true"
-        android:clickable="false"
-        android:focusable="false"
-        android:focusableInTouchMode="false" >
-
-        <com.audacity.booster.views.HoloCircleSeekBar
-            android:id="@+id/circleSeekBar_memory_stat"
-            android:layout_width="200dp"
-            android:layout_height="200dp"
-            app:max="100"
-            app:pointer_color="#c0c0c0"
-            app:pointer_halo_color="#88252525"
-            app:pointer_size="25"
-            app:text_color="#FFFFFF"
-            app:text_size="40"
-            app:wheel_active_color="#008000"
-            app:wheel_unactive_color="#8b0000" />
-    </LinearLayout>
+        app:wheel_active_color="#008000"
+        app:wheel_unactive_color="#8b0000" />
 
     <Button
         android:id="@+id/button_ramBooster_boostMemory"
@@ -73,6 +64,6 @@
         android:layout_marginBottom="40dp"
         android:text="Boost Memory"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:typeface="monospace" />
+        android:typeface="sans" />
 
 </RelativeLayout>
