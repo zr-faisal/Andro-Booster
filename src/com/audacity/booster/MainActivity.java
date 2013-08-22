@@ -1,13 +1,11 @@
 package com.audacity.booster;
 
-import com.audacity.booster.fragments.MemoryBooster;
-
-import android.app.Activity;
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -21,7 +19,13 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class MainActivity extends Activity {
+import com.audacity.booster.fragments.BatteryBooster;
+import com.audacity.booster.fragments.DetectorFragment;
+import com.audacity.booster.fragments.MemoryBooster;
+import com.audacity.booster.fragments.NetworkBooster;
+import com.audacity.booster.fragments.WifiBooster;
+
+public class MainActivity extends FragmentActivity {
 	
 	ListView lvNavDrawer;
 	TextView tvMemoryBooster, tvSignalBooster, tvGpsBooster;
@@ -50,7 +54,7 @@ public class MainActivity extends Activity {
 		getActionBar().setDisplayHomeAsUpEnabled(true);
         getActionBar().setHomeButtonEnabled(true);
 		
-        mFragmentManager = getFragmentManager();
+        mFragmentManager = getSupportFragmentManager();
 		navItems = getResources().getStringArray(R.array.nav_items);
 		
 		initIDs();
@@ -119,7 +123,10 @@ public class MainActivity extends Activity {
 					break;
 					
 				case 2:
-					Toast.makeText(MainActivity.this, "Navigate to: " + navItems[arg2], Toast.LENGTH_SHORT).show();
+					rlFragment.setVisibility(View.VISIBLE);
+					rlFrame.setVisibility(View.GONE);
+					rlFrame.setEnabled(false);
+					goToNetworkBooster();
 					break;
 					
 				case 3:
@@ -127,15 +134,24 @@ public class MainActivity extends Activity {
 					break;
 					
 				case 4:
-					Toast.makeText(MainActivity.this, "Navigate to: " + navItems[arg2], Toast.LENGTH_SHORT).show();
+					rlFragment.setVisibility(View.VISIBLE);
+					rlFrame.setVisibility(View.GONE);
+					rlFrame.setEnabled(false);
+					goToAntivirus();
 					break;
 					
 				case 5:
-					Toast.makeText(MainActivity.this, "Navigate to: " + navItems[arg2], Toast.LENGTH_SHORT).show();
+					rlFragment.setVisibility(View.VISIBLE);
+					rlFrame.setVisibility(View.GONE);
+					rlFrame.setEnabled(false);
+					goToWIFIBooster();
 					break;
 					
 				case 6:
-					Toast.makeText(MainActivity.this, "Navigate to: " + navItems[arg2], Toast.LENGTH_SHORT).show();
+					rlFragment.setVisibility(View.VISIBLE);
+					rlFrame.setVisibility(View.GONE);
+					rlFrame.setEnabled(false);
+					goToBatteryBooster();
 					break;
 				}
 				
@@ -162,7 +178,11 @@ public class MainActivity extends Activity {
 			@Override
 			public void onClick(View arg0) {
 				// TODO Auto-generated method stub
-				Toast.makeText(getBaseContext(), tvSignalBooster.getText().toString(), Toast.LENGTH_SHORT).show();
+				rlFragment.setVisibility(View.VISIBLE);
+				rlFrame.setVisibility(View.GONE);
+				rlFrame.setEnabled(false);
+				
+				goToNetworkBooster();
 			}
 		});
 
@@ -180,7 +200,11 @@ public class MainActivity extends Activity {
 			@Override
 			public void onClick(View arg0) {
 				// TODO Auto-generated method stub
-				Toast.makeText(getBaseContext(), tvAntiVirus.getText().toString(), Toast.LENGTH_SHORT).show();
+				rlFragment.setVisibility(View.VISIBLE);
+				rlFrame.setVisibility(View.GONE);
+				rlFrame.setEnabled(false);
+				
+				goToAntivirus();
 			}
 		});
 		
@@ -189,7 +213,11 @@ public class MainActivity extends Activity {
 			@Override
 			public void onClick(View arg0) {
 				// TODO Auto-generated method stub
-				Toast.makeText(getBaseContext(), tvWifiExtender.getText().toString(), Toast.LENGTH_SHORT).show();
+				rlFragment.setVisibility(View.VISIBLE);
+				rlFrame.setVisibility(View.GONE);
+				rlFrame.setEnabled(false);
+				
+				goToWIFIBooster();
 			}
 		});
 		
@@ -198,7 +226,11 @@ public class MainActivity extends Activity {
 			@Override
 			public void onClick(View arg0) {
 				// TODO Auto-generated method stub
-				Toast.makeText(getBaseContext(), tvBatterySaver.getText().toString(), Toast.LENGTH_SHORT).show();
+				rlFragment.setVisibility(View.VISIBLE);
+				rlFrame.setVisibility(View.GONE);
+				rlFrame.setEnabled(false);
+				
+				goToBatteryBooster();
 			}
 		});
 		
@@ -237,6 +269,46 @@ public class MainActivity extends Activity {
 		mFragmentTransaction.commit();
 		
 		setNavigatedTitle(1);
+	}
+	
+	private void goToNetworkBooster() {
+		
+		mFragmentTransaction = mFragmentManager.beginTransaction();
+		mFragmentTransaction.replace(R.id.content_fragment, new NetworkBooster());
+		mFragmentTransaction.addToBackStack(null);
+		mFragmentTransaction.commit();
+		
+		setNavigatedTitle(2);
+	}
+	
+	private void goToAntivirus() {
+		
+		mFragmentTransaction = mFragmentManager.beginTransaction();
+		mFragmentTransaction.replace(R.id.content_fragment, new DetectorFragment());
+		mFragmentTransaction.addToBackStack(null);
+		mFragmentTransaction.commit();
+		
+		setNavigatedTitle(5);
+	}
+	
+	private void goToWIFIBooster() {
+		
+		mFragmentTransaction = mFragmentManager.beginTransaction();
+		mFragmentTransaction.replace(R.id.content_fragment, new WifiBooster());
+		mFragmentTransaction.addToBackStack(null);
+		mFragmentTransaction.commit();
+		
+		setNavigatedTitle(5);
+	}
+	
+	private void goToBatteryBooster() {
+		
+		mFragmentTransaction = mFragmentManager.beginTransaction();
+		mFragmentTransaction.replace(R.id.content_fragment, new BatteryBooster());
+		mFragmentTransaction.addToBackStack(null);
+		mFragmentTransaction.commit();
+		
+		setNavigatedTitle(6);
 	}
 	
 	@Override

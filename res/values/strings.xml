@@ -5,10 +5,9 @@
     <string name="action_settings">Settings</string>
     <string name="hello_world">Hello world!</string>
     <string name="title_activity_main">MainActivity</string>
-  
     <string name="drawer_open">Open</string>
     <string name="drawer_close">Close</string>
-    
+
     <string-array name="nav_items">
         <item>Home</item>
         <item>Boost Memory</item>
@@ -18,5 +17,21 @@
         <item>WIFI Extender</item>
         <item>Battery Saver</item>
     </string-array>
+
+    <string name="refresh">Scan</string>
+    <string name="progress_dialog_text">Scanning app %1$d/%2$d</string>
+    <string name="app_icon_content_description">Advertising application\'s icon</string>
+    <string name="list_item_ad_framework_prefix">Ad framework</string>
+    <string name="no_ad_apps">Sorry - I couldn\'t find any apps with notification ads.\n\nIf you\'re seeing notification ads anyway, there\'s probably a new advertising company the detector doesn\'t know about yet.\n\nIf you\'d like to help, you can use the button below to email a list of your installed apps to me (the detector developer).\n\nThis is completely optional, and you\'ll be able to see everything that\'s being sent before it goes out. Your email address and installed applications will not be shared with anyone else, and I won\'t send you spam.</string>
+    <string name="report">I\'d like to help!</string>
+    <string name="no_report">No, thanks</string>
+    <string name="send_email_with">Send the report with:</string>
+    <string name="report_email_subject">AirPush Detector Non-Detection Report</string>
+    <string name="report_email_body_prefix">I\'d like to help improve the AirPush Detector! Here is a list of potentially suspicious apps I have installed:</string>
+    <string name="progress_dialog_title">Scanning&#8230;</string>
+    <string name="native_detection_dialog_title">Your device is awesome!</string>
+    <string name="native_detection_dialog_message">Good news! You don\'t need this app at all! Just press and hold on the notification for a few seconds, and your device should tell you who is creating it.</string>
+    <string name="native_detection_dialog_button_use_native">Thanks, I\'ll do that!</string>
+    <string name="native_detection_dialog_button_use_app">It didn\'t work!</string>
 
 </resources>

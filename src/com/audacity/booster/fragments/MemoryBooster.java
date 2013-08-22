@@ -5,9 +5,9 @@ import java.util.List;
 import android.app.Activity;
 import android.app.ActivityManager;
 import android.app.ActivityManager.MemoryInfo;
-import android.app.Fragment;
 import android.content.ComponentName;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -55,7 +55,7 @@ public class MemoryBooster extends Fragment {
 		tvTotalMemory.setText("System Memory = " + totalMemory + " MB");
 		tvCurrentUsage.setText("Currently Used = " + (totalMemory - freeMemory) + " MB");
 		
-		hcsMemoryMeter.setValue(parcentage);
+		hcsMemoryMeter.setValue(parcentage, "% free");
 		
 		btnBoostMemory.setOnClickListener(new View.OnClickListener() {
 			
@@ -99,7 +99,7 @@ public class MemoryBooster extends Fragment {
 		tvTotalMemory.setText("System Memory = " + totalMemory + " MB");
 		tvCurrentUsage.setText("Currently Used = " + (totalMemory - freeMemory) + " MB");
 		
-		hcsMemoryMeter.setValue(parcentage);
+		hcsMemoryMeter.setValue(parcentage, "% free");
 	}
 
 	protected void getmemoryStatus() {
