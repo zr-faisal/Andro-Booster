@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/black"
+    android:padding="8dp" >
+
+    <TextView
+        android:id="@+id/textView_ramBooster_stat"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="20dp"
+        android:layout_marginTop="20dp"
+        android:text="Network Status"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="@android:color/white"
+        android:typeface="sans" />
+
+    <com.audacity.booster.views.HoloCircleSeekBar
+        android:id="@+id/circleSeekBar_network_stat"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        app:max="100"
+        app:pointer_color="#c0c0c0"
+        app:pointer_halo_color="#88252525"
+        app:pointer_size="25"
+        app:text_color="#FFFFFF"
+        app:text_size="40"
+        android:layout_centerInParent="true"
+        app:wheel_active_color="#008000"
+        app:wheel_unactive_color="#8b0000" />
+
+    <Button
+        android:id="@+id/button_netBooster_boostNetwork"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="40dp"
+        android:text="Boost Network"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:typeface="sans" />
+
+</RelativeLayout>
